@@ -208,6 +208,7 @@ typedef struct{
     uint32_t sensorStreamHeight;
     float    focalLengthMm;
     float    pixelPitchUm;
+    bool     isAFSupported;
 } intrinsic_cam_params_t;
 
 typedef struct {
@@ -243,6 +244,7 @@ public:
     void UpdateFlag(fov_control_flag flag, void *value);
     inline bool isBayerMono() { return (mDualCamType == DUAL_CAM_BAYER_MONO); };
     void setDualCameraConfig(uint8_t type);
+    bool isMainCamFovWider();
 
 private:
     QCameraFOVControl();
@@ -261,7 +263,6 @@ private:
     cam_roi_info_t translateFocusAreas(cam_roi_info_t roiAfMain, cam_sync_type_t cam);
     cam_set_aec_roi_t translateMeteringAreas(cam_set_aec_roi_t roiAecMain, cam_sync_type_t cam);
     void generateFovControlResult();
-    bool isMainCamFovWider();
     bool isSpatialAlignmentReady();
     void resetVars();
     bool isMaster(cam_sync_type_t cam);

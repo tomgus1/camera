@@ -123,6 +123,14 @@ keeping the buffer count to 15.*/
 
 #define VIDEO_FB_BUF_COUNT 15 //Number of buffers for video face beautification.
 
+/*For noraml recording usecase the number of video buffers
+are 9 and preivew buffers are 5. In the special case
+same buffer will be used for both preview and video, therefore
+keeping the buffer count to 15.*/
+
+#define VIDEO_FB_BUF_COUNT 15 //Number of buffers for video face beautification.
+
+
 typedef enum {
     QCAMERA_NOTIFY_CALLBACK,
     QCAMERA_DATA_CALLBACK,
@@ -209,6 +217,9 @@ private:
     QCameraCmdThread mProcTh;
     bool             mActive;
 };
+
+class QCameraDisplay;
+
 class QCamera2HardwareInterface : public QCameraAllocator,
         public QCameraThermalCallback, public QCameraAdjustFPS
 {
@@ -842,9 +853,7 @@ private:
     uint32_t mSurfaceStridePadding;
 
     //QCamera Display Object
-#if 0 // Temporary removing the dependency on libgui
-    //QCameraDisplay mCameraDisplay;
-#endif
+    QCameraDisplay* mCameraDisplay;
 
     bool m_bNeedRestart;
     Mutex mMapLock;

@@ -959,6 +959,12 @@ public:
     void initDCSettings(int32_t state, uint32_t camMaster,
             bool bundleSnapshot, cam_fallback_mode_t fallback);
     bool needAnalysisStream();
+    bool isLowPowerMode() {return m_bisLowPower;};
+    void setLowPower(bool lowPowerMode) {m_bisLowPower = lowPowerMode;};
+    inline uint32_t getBlurLevel() {return m_bBokehBlurLevel;};
+    void setBokehSnaphot(bool enable);
+    void getDepthMapSize(int &width, int &height);
+    bool isAutoFocusSupported(uint32_t cam_type);
 private:
     int32_t setPreviewSize(const QCameraParameters& );
     int32_t setVideoSize(const QCameraParameters& );
