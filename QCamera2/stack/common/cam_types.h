@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2017, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2012-2018, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -432,12 +432,14 @@ typedef enum {
     CAM_FORMAT_DEPTH8,
     CAM_FORMAT_DEPTH_POINT_CLOUD,
 
+    CAM_FORMAT_META_RAW_12BIT,
     CAM_FORMAT_MAX
 } cam_format_t;
 
 typedef enum {
     CAM_FORMAT_SUBTYPE_HDR_STATS,
     CAM_FORMAT_SUBTYPE_PDAF_STATS,
+    CAM_FORMAT_SUBTYPE_FLICKER_STATS,
     CAM_FORMAT_SUBTYPE_MAX
 } cam_sub_format_type_t;
 
@@ -954,6 +956,7 @@ typedef enum {
     CAM_SENSOR_HDR_IN_SENSOR = 1,
     CAM_SENSOR_HDR_ZIGZAG,
     CAM_SENSOR_HDR_STAGGERED,
+    CAM_SENSOR_3EXP_HDR_IN_SENSOR,
     CAM_SENSOR_HDR_MAX,
 } cam_sensor_hdr_type_t;
 
@@ -1818,6 +1821,11 @@ typedef enum {
     CAM_3A_SYNC_ALGO_CTRL,/* Algorithm updated cameras directly */
 } cam_3a_sync_mode_t;
 
+typedef struct {
+    cam_3a_sync_mode_t sync_mode_stats;
+    cam_3a_sync_mode_t sync_mode_af;
+} cam_3a_sync_config_t;
+
 typedef enum {
     OIS_MODE_INACTIVE,
     OIS_MODE_ACTIVE,
@@ -2485,10 +2493,7 @@ typedef enum {
     CAM_INTF_META_DC_CAPTURE,
     /* Enable/Disable AF fine scan */
     CAM_INTF_PARM_SKIP_FINE_SCAN,
-    /* Whether to enable hybrid ae mode */
-    CAM_INTF_META_HYBRID_AE,
-    /* AF scene change */
-    CAM_INTF_META_AF_SCENE_CHANGE,
+    CAM_INTF_PARM_BOKEH_MODE,
     CAM_INTF_PARM_MAX
 } cam_intf_parm_type_t;
 
